@@ -101,7 +101,6 @@ end
 ## データベースセットアップ
 
 ```bash
-rails db:create
 rails db:migrate
 ```
 
