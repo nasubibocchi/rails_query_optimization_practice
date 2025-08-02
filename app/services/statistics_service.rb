@@ -32,17 +32,30 @@ class StatisticsService
 
   def self.user_statistics
     stats = {}
+
+    users = User.preload(:posts, posts: :comments)
     
-    User.find_each do |user|
+    # User.find_each do |user|
+    #   stats[user.id] = {
+    #     name: user.name,
+    #     total_posts: user.posts.count,
+    #     published_posts: user.posts.where(status: 'published').count,
+    #     total_comments_received: user.posts.joins(:comments).count,
+    #     avg_comments_per_post: user.posts.joins(:comments).count.to_f / [user.posts.count, 1].max
+    #   }
+    # end
+    
+    users.find_each do |user|
+      total_comment_count = user.posts.flat_map(&:comments).count
+
       stats[user.id] = {
         name: user.name,
         total_posts: user.posts.count,
-        published_posts: user.posts.where(status: 'published').count,
-        total_comments_received: user.posts.joins(:comments).count,
-        avg_comments_per_post: user.posts.joins(:comments).count.to_f / [user.posts.count, 1].max
+        published_post: user.posts.published.count,
+        total_comments_received: total_comment_count,
+        avg_comments_per_post: total_comment_count.to_f / [user.posts.count, 1].max
       }
-    end
-    
+
     stats
   end
 end
