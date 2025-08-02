@@ -15,7 +15,7 @@ class Post < ApplicationRecord
     end
 
     def active_posts_with_user_and_category_name
-      eager_load(:user, :category)
+      eager_load(:user, :category).published
     end
 
     def all_posts_and_comments
