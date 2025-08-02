@@ -8,4 +8,10 @@ class Post < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(status: 'draft') }
   scope :recent, -> { order(created_at: :desc) }
+
+  class << self
+    def titles_by_active_users
+      joins(:user).merge(User.active).pluck(:title)
+    end
+  end
 end
