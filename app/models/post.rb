@@ -8,4 +8,30 @@ class Post < ApplicationRecord
   scope :published, -> { where(status: 'published') }
   scope :draft, -> { where(status: 'draft') }
   scope :recent, -> { order(created_at: :desc) }
+
+  class << self
+    def titles_by_active_users
+      joins(:user).merge(User.active).pluck(:title)
+    end
+
+    def active_with_user_and_category_name
+      eager_load(:user, :category).published
+    end
+
+    def with_comments
+      preload(:comments)
+    end
+
+    def with_approved_comments
+      joins(:comments).merge(Comment.approved)
+    end
+
+    def published_with_user_category_tags
+      eager_load(:user, :category).preload(:tags).published
+    end
+
+    def published_by_active_users_with_category
+      eager_load(:user, :category).merge(User.active).published
+    end
+  end
 end
