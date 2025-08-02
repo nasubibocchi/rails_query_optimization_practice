@@ -63,7 +63,7 @@ PostTag (中間テーブル)
 └── belongs_to :tag
 ```
 
-詳細なER図とスキーマ設計は docs/database/er_diagram.md を参照してください。
+詳細なER図とスキーマ設計は [docs/database/er_diagram.md](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/docs/database_schema.md) を参照してください。
 
 ## 🔧 便利なコマンド
 
