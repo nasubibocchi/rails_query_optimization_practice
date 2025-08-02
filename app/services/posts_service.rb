@@ -15,7 +15,7 @@ class PostsService
       #                      .limit(3)
       #                      .includes(:user)
 
-      recent_comments = post.comments.order(created_at: :desc).limit(3)
+      recent_comments = post.comments.sort_by(&:created_at).first(3)
 
       {
         post: post,
