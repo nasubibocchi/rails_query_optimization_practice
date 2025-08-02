@@ -1,18 +1,29 @@
 class StatisticsService
   def self.recent_popular_posts
-    recent_posts = Post.where('created_at > ?', 30.days.ago)
-    
+    # recent_posts = Post.where('created_at > ?', 30.days.ago)
+    recent_posts_with_approved_comments = Post.eager_load(:user, :comments).merge(Comment.approved)
+
     result = []
-    recent_posts.each do |post|
-      if post.user.status == 'active'
-        approved_comments = post.comments.where(status: 'approved')
-        if approved_comments.count >= 2
-          result << {
-            title: post.title,
-            author_name: post.user.name,
-            approved_comment_count: approved_comments.count
-          }
-        end
+    #recent_posts.each do |post|
+    #  if post.user.status == 'active'
+    #    approved_comments = post.comments.where(status: 'approved')
+    #    if approved_comments.count >= 2
+    #      result << {
+    #        title: post.title,
+    #        author_name: post.user.name,
+    #        approved_comment_count: approved_comments.count
+    #      }
+    #    end
+    #  end
+    #end
+
+    recent_posts_with_approved_comments.each do |post|
+      if post.comments.count >= 2
+        result << {
+          title: post.title,
+          author_name: post.user.name,
+          approved_comment_count: post.comments.count
+        }
       end
     end
     
