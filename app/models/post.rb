@@ -14,11 +14,11 @@ class Post < ApplicationRecord
       joins(:user).merge(User.active).pluck(:title)
     end
 
-    def active_posts_with_user_and_category_name
+    def active_with_user_and_category_name
       eager_load(:user, :category).published
     end
 
-    def all_posts_and_comments
+    def with_comments
       preload(:comments)
     end
 
