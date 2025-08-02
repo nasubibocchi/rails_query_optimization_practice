@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  scope :published, -> { where(published: true) }
+  scope :published, -> { where(status: 'published') }
   scope :draft, -> { where(status: 'draft') }
   scope :recent, -> { order(created_at: :desc) }
 
