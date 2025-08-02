@@ -25,5 +25,9 @@ class Post < ApplicationRecord
     def with_approved_comments
       joins(:comments).merge(Comment.approved)
     end
+
+    def published_with_user_category_tags
+      eager_load(:user, :category).preload(:tags).published
+    end
   end
 end
