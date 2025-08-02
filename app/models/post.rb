@@ -29,5 +29,9 @@ class Post < ApplicationRecord
     def published_with_user_category_tags
       eager_load(:user, :category).preload(:tags).published
     end
+
+    def published_by_active_users_with_category
+      eager_load(:user, :category).merge(User.active).published
+    end
   end
 end
