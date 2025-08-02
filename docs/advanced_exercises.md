@@ -4,6 +4,7 @@
 
 ## 問題1: ダッシュボードの最適化
 以下のコードはN+1問題を含んでいます。最適化してください。
+[元のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/dashboard_service.rb)
 
 ```ruby
 def blog_dashboard
@@ -30,6 +31,7 @@ end
 
 ## 問題2: 複雑な条件での最適化
 以下の要件を満たすクエリを、可能な限り少ないSQLクエリで実現してください。
+[元のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/statistics_service.rb)
 
 **要件:**
 - 過去30日以内に投稿された記事
@@ -64,6 +66,7 @@ end
 
 ## 問題3: メモリ効率の改善
 大量のデータを扱う際のメモリ使用量を最適化してください。
+[元のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/export_service.rb)
 
 ```ruby
 # 現在のコード（メモリを大量消費）
@@ -95,6 +98,7 @@ end
 
 ## 問題4: 集計クエリの最適化
 以下の統計情報を効率的に取得してください。
+[元のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/statistics_service.rb)
 
 ```ruby
 # 現在のコード（非効率）
@@ -128,6 +132,8 @@ end
   - コメントした人の名前も表示
 - できるだけ少ないクエリで実現
 
+[元のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/posts_service.rb)
+
 ```ruby
 # 現在のコード
 def posts_with_recent_comments
@@ -158,9 +164,10 @@ end
 ```
 
 ---
-
+ここからはちょっとこのレポジトリの学習目的とずれています
+---
 ## 問題6: キャッシュ戦略
-以下のコードに適切なキャッシュを実装してください。
+[以下のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/sidebar_service.rb)に適切なキャッシュを実装してください。
 
 ```ruby
 # 現在のコード（毎回DBアクセス）
@@ -195,6 +202,7 @@ end
 
 ## 問題7: バッチ処理の最適化
 以下のバッチ処理を最適化してください。
+[コードの場所](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/batch_service.rb)
 
 ```ruby
 # 現在のコード（タイムアウトする可能性）
