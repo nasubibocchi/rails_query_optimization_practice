@@ -164,7 +164,8 @@ end
 ```
 
 ---
-
+ここからはちょっとこのレポジトリの学習目的とずれています
+---
 ## 問題6: キャッシュ戦略
 [以下のコード](https://github.com/nasubibocchi/rails_query_optimization_practice/blob/main/app/services/sidebar_service.rb)に適切なキャッシュを実装してください。
 
