@@ -17,5 +17,9 @@ class Post < ApplicationRecord
     def active_posts_with_user_and_category_name
       eager_load(:user, :category)
     end
+
+    def all_posts_and_comments
+      preload(:comments)
+    end
   end
 end
