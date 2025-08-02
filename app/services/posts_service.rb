@@ -2,10 +2,10 @@ class PostsService
   # 問題5: 関連データの条件付き読み込み
   def self.posts_with_recent_comments
     # posts = Post.published.includes(:comments)
-    posts = Post.published.eager_load(:user, :comments)
-      .merge(User.active)
-      .merge(Comment.approved)
-      .distinct
+    #
+    # こっちでもいい
+    # posts = Post.published.preload(:comments, comments: :user)
+    posts = Post.published.preload(:comments).eager_load(:user)
 
     result = posts.map do |post|
       # recent_comments = post.comments
@@ -15,7 +15,10 @@ class PostsService
       #                      .limit(3)
       #                      .includes(:user)
 
-      recent_comments = post.comments.sort_by(&:created_at).first(3)
+      recent_comments = post.comments
+                            .select { |comment| comment.status == 'active' && comment.user.status = 'active' }
+                            .sort(&:created_at)
+                            .first(3)
 
       {
         post: post,
