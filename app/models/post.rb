@@ -21,5 +21,9 @@ class Post < ApplicationRecord
     def all_posts_and_comments
       preload(:comments)
     end
+
+    def with_approved_comments
+      joins(:comments).merge(Comment.approved)
+    end
   end
 end
