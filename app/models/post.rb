@@ -13,5 +13,9 @@ class Post < ApplicationRecord
     def titles_by_active_users
       joins(:user).merge(User.active).pluck(:title)
     end
+
+    def active_posts_with_user_and_category_name
+      eager_load(:user, :category)
+    end
   end
 end
