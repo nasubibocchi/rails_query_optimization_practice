@@ -18,6 +18,7 @@ class PostsService
       recent_comments = post.comments
                             .select { |comment| comment.status == 'active' && comment.user.status = 'active' }
                             .sort(&:created_at)
+                            .reverse
                             .first(3)
 
       {
