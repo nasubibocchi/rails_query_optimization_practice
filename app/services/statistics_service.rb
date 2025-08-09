@@ -46,12 +46,13 @@ class StatisticsService
     # end
     
     users.find_each do |user|
+      published_posts = user.posts.select{ |post| post.status == "published" }
       total_comment_size = user.posts.flat_map(&:comments).size
 
       stats[user.id] = {
         name: user.name,
         total_posts: user.posts.size,
-        published_post: user.posts.published.size,
+        published_post: published_posts&.size,
         total_comments_received: total_comment_size,
         avg_comments_per_post: total_comment_size.to_f / [user.posts.size, 1].max
       }
