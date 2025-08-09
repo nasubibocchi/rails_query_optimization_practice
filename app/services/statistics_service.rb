@@ -22,7 +22,7 @@ class StatisticsService
         result << {
           title: post.title,
           author_name: post.user.name,
-          approved_comment_count: post.comments.count
+          approved_comment_count: post.comments.size
         }
       end
     end
